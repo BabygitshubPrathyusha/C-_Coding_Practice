@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "aabbcdde";
+
+        HashSet<char> seenCharacters = new HashSet<char>();
+        string result = "";
+
+        foreach (char character in input)
+        {
+            if (!seenCharacters.Contains(character))
+            {
+                seenCharacters.Add(character);
+                result += character;
+            }
+        }
+
+        Console.WriteLine(result);
+    }
+}
