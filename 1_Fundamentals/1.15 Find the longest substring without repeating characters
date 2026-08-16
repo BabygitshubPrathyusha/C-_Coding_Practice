@@ -1,0 +1,39 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "abcabcbb";
+        HashSet<char> seen = new HashSet<char>();
+        // Using Sliding window
+        int left = 0;
+        int maxLength = 0;
+        string longestSubstring = "";
+
+        for (int right = 0; right < input.Length; right++)
+        {
+            while (seen.Contains(input[right]))
+            {
+                seen.Remove(input[left]);
+                left++;
+            }
+            seen.Add(input[right]);
+            int currentLength = right - left + 1;
+            if (currentLength > maxLength)
+            {
+                maxLength = currentLength;
+                longestSubstring = input.Substring(left, currentLength);
+            }
+        }
+
+        Console.WriteLine($"Longest substring: {longestSubstring}");
+        Console.WriteLine($"Length: {maxLength}");
+    }
+}
+
+/*
+Longest substring: abc
+Length: 3
+*/
