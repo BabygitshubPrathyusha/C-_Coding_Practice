@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "aabbcdde";
+
+        Dictionary<char, int> characterCount = new Dictionary<char, int>();
+
+        // Step 1: Count each character
+        foreach (char character in input)
+        {
+            if (characterCount.ContainsKey(character))
+            {
+                characterCount[character]++;
+            }
+            else
+            {
+                characterCount[character] = 1;
+            }
+        }
+
+        // Step 2: Find the first non-repeating character
+        foreach (char character in input)
+        {
+            if (characterCount[character] == 1)
+            {
+                Console.WriteLine($"First non-repeating character: {character}");
+                break;
+            }
+        }
+    }
+}
