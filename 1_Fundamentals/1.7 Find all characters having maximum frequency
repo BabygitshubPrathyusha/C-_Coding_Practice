@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "aabbcdde";
+
+        Dictionary<char, int> characterCount = new Dictionary<char, int>();
+
+        // Step 1: Count each character
+        foreach (char character in input)
+        {
+            if (characterCount.ContainsKey(character))
+            {
+                characterCount[character]++;
+            }
+            else
+            {
+                characterCount[character] = 1;
+            }
+        }
+
+        // Step 2: Find the maximum frequency
+        int maxCount = 0;
+
+        foreach (var item in characterCount)
+        {
+            if (item.Value > maxCount)
+            {
+                maxCount = item.Value;
+            }
+        }
+
+        // Step 3: Print all characters having maximum frequency
+        foreach (var item in characterCount)
+        {
+            if (item.Value == maxCount)
+            {
+                Console.WriteLine($"{item.Key} = {item.Value}");
+            }
+        }
+    }
+}
