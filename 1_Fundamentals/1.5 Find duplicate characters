@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "aabbcdde";
+
+        Dictionary<char, int> characterCount = new Dictionary<char, int>();
+
+        // Count each character
+        foreach (char character in input)
+        {
+            if (characterCount.ContainsKey(character))
+            {
+                characterCount[character]++;
+            }
+            else
+            {
+                characterCount[character] = 1;
+            }
+        }
+
+        // Find duplicate characters
+        foreach (var item in characterCount)
+        {
+            if (item.Value > 1)
+            {
+                Console.WriteLine($"{item.Key} appears {item.Value} times");
+            }
+        }
+    }
+}
