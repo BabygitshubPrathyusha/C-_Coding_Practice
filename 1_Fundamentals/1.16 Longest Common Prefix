@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string[] words = { "flower", "flow", "flight" };
+        string prefix = words[0];
+        for(int i=1; i< words.Length; i++)
+        {
+           while(!words[i].StartsWith(prefix)){
+               prefix = prefix.Substring(0, prefix.Length - 1);
+               if (prefix == "") { break; }
+           }
+        }
+        Console.WriteLine($"Longest Common Prefix: {prefix}");
+        
+        string firstWord = words[0];
+        for (int i = 0; i < firstWord.Length; i++)
+        {
+            char currentCharacter = firstWord[i];
+            for (int j = 1; j < words.Length; j++)
+            {
+                if (i >= words[j].Length || words[j][i] != currentCharacter)
+                {
+                    Console.WriteLine( $"Longest Common Prefix: {firstWord.Substring(0, i)}");
+                    return;
+                }
+            }
+        }
+        Console.WriteLine($"Longest Common Prefix: {firstWord}");
+    }
+}
