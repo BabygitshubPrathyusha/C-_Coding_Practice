@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string s = "cbaebabacd";
+        string p = "abc";
+
+        List<int> result = new List<int>();
+
+        if (p.Length > s.Length)
+        {
+            Console.WriteLine("No anagrams found");
+            return;
+        }
+
+        Dictionary<char, int> required = new Dictionary<char, int>();
+        Dictionary<char, int> window = new Dictionary<char, int>();
+
+        // Count characters required from p
+        foreach (char ch in p)
+        {
+            if (required.ContainsKey(ch))
+            {
+                required[ch]++;
+            }
+            else
+            {
+                required[ch] = 1;
+            }
+        }
+
+        int left = 0;
+
+        for (int right = 0; right < s.Length; right++)
+        {
+            char rightChar = s[right];
+
+            // Add current character to window
+            if (window.ContainsKey(rightChar))
+            {
+                window[rightChar]++;
+            }
+            else
+            {
+                window[rightChar] = 1;
+            }
+
+            // Keep window size equal to p.Length
+            if (right - left + 1 > p.Length)
+            {
+                char leftChar = s[left];
+
+                window[leftChar]--;
+
+                left++;
+            }
+
+            // Check whether current window is an anagram
+            if (right - left + 1 == p.Length)
+            {
+                bool isAnagram = true;
+
+                foreach (var item in required)
+                {
+                    if (!window.ContainsKey(item.Key) ||
+                        window[item.Key] != item.Value)
+                    {
+                        isAnagram = false;
+                        break;
+                    }
+                }
+
+                if (isAnagram)
+                {
+                    result.Add(left);
+                }
+            }
+        }
+
+        Console.WriteLine("Anagram starting indexes:");
+
+        foreach (int index in result)
+        {
+            Console.WriteLine(index);
+        }
+    }
+}
+
+/* Example:
+s = "cbaebabacd"
+p = "abc"
+
+Anagrams of "abc" include:
+abc
+acb
+bac
+bca
+cab
+cba
+
+Output
+0, 6
+*/
