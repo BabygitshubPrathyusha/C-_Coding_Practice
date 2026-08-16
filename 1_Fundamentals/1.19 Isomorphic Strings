@@ -1,0 +1,74 @@
+/*
+Two strings are isomorphic if every character in the first string can be mapped
+to exactly one character in the second string, while preserving the pattern.
+s = "egg"
+t = "add"
+
+Example 2 ❌
+s = "foo"
+t = "bar"
+Mapping starts:
+f → b
+o → a
+But the second o would need to map to r.
+So:
+o → a
+o → r
+❌ Not allowed.
+*/
+
+using System;
+using System.Collections.Generic;
+class HelloWorld
+{
+    static void Main()
+    {
+        string s = "egg";
+        string t = "add";
+
+        if (s.Length != t.Length)
+        {
+            Console.WriteLine("Not Isomorphic");
+            return;
+        }
+
+        Dictionary<char, char> sToT = new Dictionary<char, char>();
+        Dictionary<char, char> tToS = new Dictionary<char, char>();
+
+        bool isIsomorphic = true;
+        for (int i = 0; i < s.Length; i++)
+        {
+            char charFromS = s[i];
+            char charFromT = t[i];
+            // Check s → t mapping
+            if (sToT.ContainsKey(charFromS))
+            {
+                if (sToT[charFromS] != charFromT)
+                {
+                    isIsomorphic = false;
+                    break;
+                }
+            }
+            else
+            {
+                sToT[charFromS] = charFromT;
+            }
+
+            // Check t → s mapping
+            if (tToS.ContainsKey(charFromT))
+            {
+                if (tToS[charFromT] != charFromS)
+                {
+                    isIsomorphic = false;
+                    break;
+                }
+            }
+            else
+            {
+                tToS[charFromT] = charFromS;
+            }
+        }
+
+        Console.WriteLine( isIsomorphic ? "Isomorphic" : "Not Isomorphic");
+    }
+}
