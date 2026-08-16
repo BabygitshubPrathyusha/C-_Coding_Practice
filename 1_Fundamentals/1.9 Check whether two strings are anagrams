@@ -1,0 +1,103 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string s1 = "listen";
+        string s2 = "silent";
+        
+        // Approach 1: Dictionary 
+        Dictionary<char, int> dict1 = new Dictionary<char, int>();
+        Dictionary<char, int> dict2 = new Dictionary<char, int>();
+
+        if (s1.Length != s2.Length)
+        {
+            Console.WriteLine("Not Anagram");
+        }
+        else
+        {
+            // Count characters in first string
+            foreach (char character in s1)
+            {
+                if (dict1.ContainsKey(character))
+                {
+                    dict1[character]++;
+                }
+                else
+                {
+                    dict1[character] = 1;
+                }
+            }
+
+            // Count characters in second string
+            foreach (char character in s2)
+            {
+                if (dict2.ContainsKey(character))
+                {
+                    dict2[character]++;
+                }
+                else
+                {
+                    dict2[character] = 1;
+                }
+            }
+
+            bool isAnagram = true;
+            foreach (var item in dict1)
+            {
+                if (!dict2.ContainsKey(item.Key) ||
+                    dict2[item.Key] != item.Value)
+                {
+                    isAnagram = false;
+                    break;
+                }
+            }
+            Console.WriteLine(isAnagram ? "Anagram" : "Not Anagram");
+        }
+        
+        // Approach 2: using char array
+        char[] str1 = s1.ToCharArray();
+        char[] str2 = s2.ToCharArray();
+
+        Array.Sort(str1);
+        Array.Sort(str2);
+
+        if (str1.SequenceEqual(str2))
+        {
+            Console.WriteLine("Anagram");
+        }
+        else
+        {
+            Console.WriteLine("Not anagram");
+        }
+        
+        // Approach 3: Without 2 Dictionary
+        Dictionary<char, int> characterCount = new Dictionary<char, int>();
+        foreach (char character in s1)
+        {
+            if (characterCount.ContainsKey(character)) characterCount[character]++;
+            else characterCount[character] = 1;
+        }
+        foreach (char character in s2)
+        {
+            if (!characterCount.ContainsKey(character))
+            { 
+                Console.WriteLine("Not Anagram");
+                return;
+            }
+            characterCount[character]--;
+        }
+        foreach (var item in characterCount)
+        {
+            if (item.Value != 0)
+            {
+                Console.WriteLine("Not Anagram");
+                return;
+            }
+        }
+        Console.WriteLine("Anagram");
+    }
+}
