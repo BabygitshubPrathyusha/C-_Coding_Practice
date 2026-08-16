@@ -1,0 +1,40 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string s1 = "I am learning dotnet development";
+        List<string> sentence = s1.Split(" ").ToList();
+        
+        // Using Dictionary
+        Dictionary<string, int> dict = new Dictionary<string, int>();
+        
+        foreach(var item in sentence){
+            if(dict.ContainsKey(item)) { continue; }
+            else { dict[item] = item.Length; }
+        }
+        
+        int maxVal = 0; string maxKey = " ";
+        foreach(var x in  dict){
+            if(x.Value > maxVal){
+                maxVal = x.Value;
+                maxKey = x.Key;
+            }
+        }
+        Console.WriteLine(maxKey + " " + maxVal);
+        
+        // Using string
+        string longestWord = "";
+        foreach (string word in sentence)
+        {
+            if (word.Length > longestWord.Length)
+            {
+                longestWord = word;
+            }
+        }
+        Console.WriteLine($"{longestWord} {longestWord.Length}");
+    }
+}
