@@ -1,0 +1,90 @@
+using System;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "babad";
+
+        string longest = FindLongestPalindrome(input);
+
+        Console.WriteLine($"Longest Palindromic Substring: {longest}");
+    }
+
+    static string FindLongestPalindrome(string s)
+    {
+        if (string.IsNullOrEmpty(s))
+        {
+            return "";
+        }
+
+        int start = 0;
+        int maxLength = 1;
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            // Odd-length palindrome
+            ExpandFromCenter(s, i, i, ref start, ref maxLength);
+
+            // Even-length palindrome
+            ExpandFromCenter(s, i, i + 1, ref start, ref maxLength);
+        }
+
+        return s.Substring(start, maxLength);
+    }
+
+    static void ExpandFromCenter(
+        string s,
+        int left,
+        int right,
+        ref int start,
+        ref int maxLength)
+    {
+        while (left >= 0 &&
+               right < s.Length &&
+               s[left] == s[right])
+        {
+            int currentLength = right - left + 1;
+
+            if (currentLength > maxLength)
+            {
+                start = left;
+                maxLength = currentLength;
+            }
+
+            left--;
+            right++;
+        }
+    }
+}
+
+/* Example
+A palindrome expands from its center.
+
+For:
+
+"babad"
+
+The center can be:
+
+b a b
+  ↑
+center
+
+or:
+
+a b a
+  ↑
+center
+
+We need to check both types:
+
+Odd-length palindrome
+"aba"
+ ↑
+center character
+Even-length palindrome
+"abba"
+  ↑
+center is between b and b
+*/
