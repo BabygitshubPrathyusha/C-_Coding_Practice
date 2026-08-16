@@ -1,0 +1,31 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string s1 = "abcd";
+        string s2 = "cdab";
+
+        bool isRotation = false;
+        if (s1.Length == s2.Length)
+        {
+            string combined = s1 + s1;
+            isRotation = combined.Contains(s2);
+        }
+        Console.WriteLine(isRotation ? "Rotation" : "Not Rotation");
+    }
+}
+
+/*
+Example
+s1 = "abcd"
+
+Valid rotations:
+abcd
+bcda
+cdab
+dabc
+*/
