@@ -1,1 +1,20 @@
 
+using System;
+class HelloWorld {
+  static void Main() {
+      // Uisng string iterations
+      string s ="Reversal"; string op ="";
+      for(int i = s.Length -1; i>=0 ;i--){
+          op+=s[i];
+      }
+      Console.WriteLine("Hello World {0}", op);
+      // Using inbuilt fnction Reverse()
+      char[] charS = s.ToCharArray();
+      Array.Reverse(charS);
+      string os = new string(charS);
+      Console.WriteLine("Hello World {0}", os);
+  }
+}
+
+// Output 
+// Hello World lasreveR
