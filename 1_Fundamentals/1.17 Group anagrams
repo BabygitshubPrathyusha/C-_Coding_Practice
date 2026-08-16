@@ -1,0 +1,38 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+class HelloWorld
+{
+    static void Main()
+    {
+        string[] words = { "eat", "tea", "tan", "ate", "nat", "bat" };
+        Dictionary<string, List<string>> groups = new Dictionary<string, List<string>>();
+        foreach (string word in words)
+        {
+            // Create a key by sorting the characters
+            char[] characters = word.ToCharArray();
+            Array.Sort(characters);
+            string key = new string(characters);
+            // Create a group if it doesn't exist
+            if (!groups.ContainsKey(key))
+            {
+                groups[key] = new List<string>();
+            }
+            // Add the original word to the group
+            groups[key].Add(word);
+        }
+
+        // Print the groups
+        foreach (var group in groups)
+        {
+            Console.WriteLine(string.Join(", ", group.Value));
+        }
+        
+        
+        var linqGroups = words.GroupBy(word => new string(word.OrderBy(c => c).ToArray()));
+        foreach (var group in linqGroups)
+        {
+            Console.WriteLine(string.Join(", ", group));
+        }
+    }
+}
