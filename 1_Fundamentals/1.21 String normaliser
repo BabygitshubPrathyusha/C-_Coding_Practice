@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "   Hello   WORLD   hello   ";
+        string expected = "hello world hello";
+
+        // 1. Remove leading and trailing spaces
+        string trimmedInput = input.Trim();
+
+        // 2. Split into words
+        string[] words = trimmedInput.Split(
+            ' ',
+            StringSplitOptions.RemoveEmptyEntries
+        );
+
+        // 3. Count word frequency
+        Dictionary<string, int> wordCount =
+            new Dictionary<string, int>(
+                StringComparer.OrdinalIgnoreCase
+            );
+
+        // 4. Build normalized string efficiently
+        StringBuilder normalized = new StringBuilder();
+
+        foreach (string word in words)
+        {
+            // Add word to dictionary
+            if (wordCount.ContainsKey(word))
+            {
+                wordCount[word]++;
+            }
+            else
+            {
+                wordCount[word] = 1;
+            }
+
+            // Build normalized string
+            if (normalized.Length > 0)
+            {
+                normalized.Append(" ");
+            }
+
+            normalized.Append(word.ToLower());
+        }
+
+        // 5. Display normalized string
+        Console.WriteLine($"Normalized: {normalized}");
+
+        // 6. Display frequencies
+        foreach (var item in wordCount)
+        {
+            Console.WriteLine($"{item.Key.ToLower()} → {item.Value}");
+        }
+
+        // 7. Compare strings using StringComparison
+        bool isEqual = string.Equals(
+            normalized.ToString(),
+            expected,
+            StringComparison.OrdinalIgnoreCase
+        );
+
+        Console.WriteLine($"Matches expected: {isEqual}");
+    }
+}
+
+/*
+
+Write a program that:
+
+Removes leading/trailing whitespace.
+Removes extra spaces between words.
+Makes comparison case-insensitive.
+Counts the frequency of each word.
+Returns the normalized string.
+Builds the result efficiently using StringBuilder.
+Checks whether the normalized string equals another string using StringComparison.
+
+Example:
+
+Normalized: "Hello WORLD hello"
+
+Word frequencies:
+hello → 2
+world → 1
+
+Is equal:
+true
+*/
