@@ -1,0 +1,49 @@
+using System;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "madam";
+
+        // Approach 1: Reverse the string using a loop
+        string reversedString = "";
+        for (int i = input.Length - 1; i >= 0; i--)
+        {
+            reversedString += input[i];
+        }
+        if (input.Equals(reversedString, StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine($"{input} is a palindrome");
+        }
+
+
+        // Approach 2: Reverse the string using Array.Reverse()
+        char[] characters = input.ToCharArray();
+
+        Array.Reverse(characters);
+        string reversedUsingArray = new string(characters);
+        if (input.Equals(reversedUsingArray, StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine($"{input} is a palindrome");
+        }
+
+
+        // Approach 3: Compare characters from both ends
+        bool isPalindrome = true;
+        int lastIndex = input.Length - 1;
+
+        for (int i = 0; i < input.Length / 2; i++)
+        {
+            if (input[i] != input[lastIndex - i])
+            {
+                isPalindrome = false;
+                break;
+            }
+        }
+        if (isPalindrome)
+        {
+            Console.WriteLine($"{input} is a palindrome");
+        }
+    }
+}
