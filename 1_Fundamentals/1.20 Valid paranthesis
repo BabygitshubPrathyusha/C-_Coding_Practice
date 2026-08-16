@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string input = "{[()]}";
+
+        Stack<char> stack = new Stack<char>();
+
+        foreach (char character in input)
+        {
+            // Opening brackets
+            if (character == '(' ||
+                character == '[' ||
+                character == '{')
+            {
+                stack.Push(character);
+            }
+            // Closing brackets
+            else if (character == ')' ||
+                     character == ']' ||
+                     character == '}')
+            {
+                // No opening bracket available
+                if (stack.Count == 0)
+                {
+                    Console.WriteLine("Invalid");
+                    return;
+                }
+
+                char openingBracket = stack.Pop();
+
+                if ((character == ')' && openingBracket != '(') ||
+                    (character == ']' && openingBracket != '[') ||
+                    (character == '}' && openingBracket != '{'))
+                {
+                    Console.WriteLine("Invalid");
+                    return;
+                }
+            }
+        }
+
+        if (stack.Count == 0)
+        {
+            Console.WriteLine("Valid");
+        }
+        else
+        {
+            Console.WriteLine("Invalid");
+        }
+    }
+}
