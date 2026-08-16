@@ -1,0 +1,25 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+
+class HelloWorld
+{
+    static void Main()
+    {
+        string s1 = "I am learning dotnet development";
+        
+        // using string functions
+        char[] characters = s1.ToCharArray();
+        Array.Reverse(characters);
+        string reverse = new string(characters);
+        Console.WriteLine(reverse);
+        
+        // using iterations
+        string reversed = "";
+        for (int i = s1.Length - 1; i >= 0; i--)
+        {
+            reversed += s1[i];
+        }
+        Console.WriteLine(reversed);
+    }
+}
