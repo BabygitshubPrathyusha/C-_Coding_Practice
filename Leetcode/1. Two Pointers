@@ -1,0 +1,87 @@
+Two Pointers 
+Idea: Use two indexes/pointers to traverse an array/string instead of using nested loops.
+
+Usually:
+
+int left = 0;
+int right = nums.Length - 1;
+
+while (left < right)
+{
+    // process nums[left] and nums[right]
+
+    if (/* condition */)
+        left++;
+    else
+        right--;
+}
+
+When to use
+Look for these clues:
+
+Sorted array
+Find a pair satisfying a condition
+Compare elements from both ends
+Remove duplicates
+Palindrome problems
+
+Need O(n) instead of O(n²)
+
+Classic example — Two Sum in sorted array
+
+int left = 0;
+int right = nums.Length - 1;
+
+while (left < right)
+{
+    int sum = nums[left] + nums[right];
+
+    if (sum == target)
+        return new[] { left, right };
+
+    if (sum < target)
+        left++;
+    else
+        right--;
+}
+
+return Array.Empty<int>();
+
+Why does this work?
+
+For a sorted array:
+
+[1, 2, 4, 6, 8, 10]
+ ↑              ↑
+left           right
+
+Sum too small → move left right
+Sum too large → move right left
+Sum correct → found it
+Complexity
+Time: O(n)
+Space: O(1)
+
+Important patterns
+1. Opposite directions
+
+left →       ← right
+
+Used for:
+
+Two Sum II
+Container With Most Water
+Valid Palindrome
+3Sum
+
+2. Same direction / fast & slow
+
+slow →
+fast →→
+
+Used for:
+
+Remove duplicates
+Move zeroes
+Linked-list cycle detection
+Partitioning
