@@ -1,1 +1,18 @@
 
+Fast & Slow Pointers — C# Quick Notes
+
+Idea: Use two pointers moving at different speeds:
+
+slow → moves 1 step
+fast → moves 2 steps
+
+Commonly used for linked lists and cycle detection.
+
+ListNode slow = head;
+ListNode fast = head;
+
+while (fast != null && fast.next != null)
+{
+    slow = slow.next;
+    fast = fast.next.next;
+}
